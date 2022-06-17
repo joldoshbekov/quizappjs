@@ -1,3 +1,11 @@
+const btnStart = document.getElementById('main-start');
+const questionsContainer = document.getElementById('question-container');
+const questionTitleElement = document.getElementById('question-title');
+const questionAnswers = document.getElementById('question-answers');
+const btnNextQuestion = document.getElementById('next'); 
+const finishedBlock = document.getElementById('end');
+const scoreElement = document.getElementById('score');
+
 const questions = [
 	{
 		question: 'Кто основатель html',
@@ -56,13 +64,8 @@ const questions = [
 ];
 
 
-const btnStart = document.getElementById('main-start');
-const questionsContainer = document.getElementById('question-container');
-const questionTitleElement = document.getElementById('question-title');
-const questionAnswers = document.getElementById('question-answers');
-const btnNextQuestion = document.getElementById('next'); 
-
 let currentQuestinIndex;
+let score = 0;
 
 btnStart.addEventListener('click', startTest);
 
@@ -70,8 +73,18 @@ btnStart.addEventListener('click', startTest);
 // next question 
 btnNextQuestion.addEventListener('click', function() {
 	currentQuestinIndex++;
-	resetQustionContainer();
-	showQuestion();
+	
+	if(currentQuestinIndex <= 4) {
+		resetQustionContainer();
+		showQuestion();
+	}
+
+	else {
+		finishedBlock.classList.remove('hide');
+		questionsContainer.classList.add('hide');
+		scoreElement.textContent = `🏆${score}`;
+	}
+	
 });
 
 
@@ -94,11 +107,33 @@ function showQuestion() {
 		buttonAnswer.classList.add('btn');
 		buttonAnswer.textContent = prop.text;
 		questionAnswers.append(buttonAnswer);
-	}
 
+		if(prop.correct) {
+			buttonAnswer.dataset.correct = prop.correct;
+		}
+
+		buttonAnswer.addEventListener('click', selectAnswers)
+	}
 }
 
+
+
 function resetQustionContainer() {
-	console.log(questionAnswers);
 	questionAnswers.innerHTML = '';
+	document.body.classList.remove('success');
+	document.body.classList.remove('error');
+}
+
+
+function selectAnswers(e) {
+	if(e.target.dataset.correct) {
+		document.body.classList.add('success');
+		this.classList.add('success');
+		score++;
+	}
+
+	else {
+		document.body.classList.add('error');
+		this.classList.add('error');
+	}
 }

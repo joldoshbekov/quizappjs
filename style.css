@@ -5,9 +5,9 @@
 }
 
 :root {
-	--hue-main: 250;
+	--hue-main: 200;
 	--hue-error: 16;
-	--hue-succes:  100;
+	--hue-succes:  145;
 	--white-bg:  #fff;
 }
 
@@ -38,12 +38,20 @@ body {
 }
 
 .btn {
-	background-color: hsl(var(--hue-main), 100%, 50%);
-	padding: 20px 0;
+	background-color: hsl(var(--hue-main), 100%, 20%);
+	padding: 20px 10px;
 	border: none;
 	border-radius: 5px;
 	color: #fff;
 	cursor: pointer;
+	font-size: 1.2rem;
+}
+
+.success {
+	background-color: hsl(var(--hue-succes), 100%, 50%);
+}
+.error {
+	background-color: hsl(var(--hue-error), 100%, 50%);
 }
 
 .question-buttons {
@@ -52,10 +60,15 @@ body {
 }
 
 .question-buttons > .btn, #main-start {
-	width: 100px;
+	width: 150px;
 
 }
 
 .hide {
 	display: none;
+}
+
+.question-end > span {
+	font-size: 2rem;
+	flex-wrap: bold;
 }
